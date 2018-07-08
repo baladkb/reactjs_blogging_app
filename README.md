@@ -1,6 +1,6 @@
 # reactjs_blogging_app
 
-Creating a Blogging App Using React
+Creating a Blogging App Using React (reactjs - nodejs - expressjs - monogodb)
 
 Reference
 
