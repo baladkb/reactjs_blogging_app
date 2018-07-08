@@ -13,6 +13,8 @@ b.https://code.tutsplus.com/tutorials/understanding-how-to-handle-routing-in-rea
        https://github.com/pvin/reactRoutingApp
 
 c. part 1 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-user-sign-in--cms-28568
+       
+       https://github.com/royagasthyan/ReactBlogApp-SignIn  
 
 d. part 2 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-reactjs-add-post--cms-28579
 
