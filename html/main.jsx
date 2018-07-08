@@ -7,7 +7,6 @@ class Signin extends React.Component {
 
     constructor(props){
         super(props);
-        console.log('1111');
         this.signIn = this.signIn.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -17,9 +16,15 @@ class Signin extends React.Component {
         };
     }
 
+    handleEmailChange(e){
+        this.setState({email:e.target.value})
+    }
+
+    handlePasswordChange(e){
+        this.setState({password:e.target.value})
+    }
 
     signIn(){
-        console.log('22222');
         //alert('Email address is ' + this.state.email + ' Password is ' + this.state.password);
         axios.post('/signin', {
             email: this.state.email,
@@ -31,16 +36,6 @@ class Signin extends React.Component {
             .catch(function (error) {
                 console.log(error);
             });
-    }
-
-    handleEmailChange(e){
-        console.log('3333');
-        this.setState({email:e.target.value})
-    }
-
-    handlePasswordChange(e){
-        console.log('444');
-        this.setState({password:e.target.value})
     }
 
     render(){
@@ -70,6 +65,48 @@ class Signin extends React.Component {
 }
 
 class Signup extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.signUp = this.signUp.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.state = {
+            name:'',
+            email:'',
+            password:''
+        };
+    }
+
+    handleNameChange(e){
+        this.setState({name:e.target.value})
+    }
+
+    handleEmailChange(e){
+        this.setState({email:e.target.value})
+    }
+
+    handlePasswordChange(e){
+        this.setState({password:e.target.value})
+    }
+
+    signUp(){
+        console.log('up up');
+        axios.post('/signup', {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password
+
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     render(){
         return (
             <div>
@@ -92,29 +129,17 @@ class Signup extends React.Component{
                     <button className="btn btn-lg btn-primary btn-block" onClick={this.signUp} type="button">Sign up</button>
                 </form>
                 <div>
-                    <Link to="/signin">{'SignIn'}</Link>
+                    <Link to="/">{'SignIn'}</Link>
                 </div>
             </div>
         )
     }
 
-    handleNameChange(e){
 
-    }
-
-    handleEmailChange(e){
-
-    }
-
-    handlePasswordChange(e){
-
-    }
 }
 
 ReactDOM.render(
     <Router history={hashHistory}>
         <Route component={Signin} path="/"></Route>
         <Route component={Signup} path="/signup"></Route>
-    </Router>,
-
-document.getElementById('app'));
+    </Router>, document.getElementById('app'));
