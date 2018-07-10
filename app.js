@@ -14,17 +14,29 @@ app.listen(7777,function(){
 
 
 app.post('/signup', function (req, res) {
-    user.signup('','','')
+    var name=req.body.name;
+    var email=req.body.email;
+    var password=req.body.password;
+
+    if(name && email && password){
+        user.signup(name, email, password)
+    }
+    else{
+        res.send('Failure');
+    }
 })
 
 app.post('/signin', function (req, res) {
     var user_name=req.body.email;
     var password=req.body.password;
-    if(user_name=='admin' && password=='admin'){
-        res.send('success');
-    }
-    else{
-        res.send('Failure');
-    }
+    user.validateSignIn(user_name,password,function(result){
+        if(result){
+            res.send('Success')
+        }
+        else{
+            res.send('Wrong username password')
+        }
+    });
+
 })
 

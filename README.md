@@ -18,6 +18,8 @@ c. part 1 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-re
 
 d. part 2 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-reactjs-add-post--cms-28579
 
+       https://github.com/tutsplus/ReactBlogApp-SignUp
+
 e. part 3 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-part-3-add-display-post--cms-28685
 
 f. part 4 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-part-4-update-delete-post--cms-28855
