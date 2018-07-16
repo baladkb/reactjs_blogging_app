@@ -3,8 +3,14 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var app = express();
 var user = require('./user')
+var post = require('./post')
+
+var session = require('express-session');
 
 app.use(bodyParser.json());
+
+app.use(session({secret: 'my-secret'}));
+var sessions
 
 app.use(express.static(path.join(__dirname,"/html")));
 
@@ -27,11 +33,13 @@ app.post('/signup', function (req, res) {
 })
 
 app.post('/signin', function (req, res) {
+    sessions=req.session;
     var user_name=req.body.email;
     var password=req.body.password;
     user.validateSignIn(user_name,password,function(result){
         if(result){
-            res.send('Success')
+            sessions.username = user_name;
+            res.send('success')
         }
         else{
             res.send('Wrong username password')
@@ -40,3 +48,19 @@ app.post('/signin', function (req, res) {
 
 })
 
+app.get('/home', function(req, res){
+    if(sessions && sessions.username){
+        res.sendFile(__dirname + '/html/home.html');
+    }
+    else{
+        res.send('unauthorized');
+    }
+})
+
+app.post('/addPost', function(req, res){
+    var title = req.body.title;
+    var subject = req.body.subject;
+    post.addPost(title, subject ,function(result){
+        res.send(result);
+    });
+})

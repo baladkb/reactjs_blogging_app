@@ -22,6 +22,8 @@ d. part 2 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-re
 
 e. part 3 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-part-3-add-display-post--cms-28685
 
+       https://github.com/royagasthyan/ReactBlogApp-AddPost
+
 f. part 4 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-part-4-update-delete-post--cms-28855
 
 g. part 5 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-part-5-profile-page--cms-29131 

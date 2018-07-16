@@ -31,7 +31,9 @@ class Signin extends React.Component {
             password: this.state.password
         })
             .then(function (response) {
-                console.log(response);
+                if(response.data == 'success'){
+                    window.location.assign('http://localhost:7777/home')
+                }
             })
             .catch(function (error) {
                 console.log(error);
@@ -92,7 +94,6 @@ class Signup extends React.Component{
     }
 
     signUp(){
-        console.log('up up');
         axios.post('/signup', {
             name: this.state.name,
             email: this.state.email,
@@ -142,4 +143,5 @@ ReactDOM.render(
     <Router history={hashHistory}>
         <Route component={Signin} path="/"></Route>
         <Route component={Signup} path="/signup"></Route>
-    </Router>, document.getElementById('app'));
+    </Router>,
+    document.getElementById('app'));
