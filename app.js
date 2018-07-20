@@ -64,3 +64,9 @@ app.post('/addPost', function(req, res){
         res.send(result);
     });
 })
+
+app.post('/getpost',function(req,res){
+    post.getPost(function(result){
+        res.send(result);
+    });
+})

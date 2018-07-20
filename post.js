@@ -20,10 +20,14 @@ module.exports = {
                 }
             });
         });
-    }
+    },
+
+    getPost: function(callback){MongoClient.connect(url, function(err, database){
+        const dbase = database.db('Blog')
+        dbase.collection('post', function (err, collection) {
+            collection.find().toArray(function (err, list) {
+                callback(list);
+            });
+        });
+    })}
 }
-
-
-//MongoClient.connect(url, function(err, database) {
-//    const dbase = database.db('Blog')
-//    dbase.collection('user').insertOne( {
