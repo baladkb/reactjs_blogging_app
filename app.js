@@ -86,3 +86,10 @@ app.post('/getPostWithId', function(req,res){
         res.send(result);
     })
 })
+
+app.post('/deletePost', function(req,res){
+    var id = req.body.id;
+    post.deletePost(id, function(result){
+        res.send(result)
+    })
+})

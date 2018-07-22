@@ -70,5 +70,24 @@ module.exports = {
                     }
                 })
         })
+    },
+
+    deletePost: function(id, callback){
+        MongoClient.connect(url, function(err, database){
+            const dbase = database.db('Blog')
+            dbase.collection('post').deleteOne({
+                _id: new mongodb.ObjectID(id)
+            },
+                function(err, result){
+                    assert.equal(err, null);
+                    console.log("Deleted the post.");
+                    if(err == null){
+                        callback(true)
+                    }
+                    else{
+                        callback(false)
+                    }
+                });
+        });
     }
 }

@@ -6,34 +6,52 @@ var Link = window.ReactRouter.Link;
 
 class ShowPost extends React.Component {
 
-        constructor(props) {
-            super(props);
-            this.updatePost = this.updatePost.bind(this);
-            //this.getPost = this.getPost.bind(this);
-            this.state = {
-                posts:[]
-            };
+    constructor(props) {
+        super(props);
+        this.updatePost = this.updatePost.bind(this);
+        this.deletePost = this.deletePost.bind(this);
+        //this.getPost = this.getPost.bind(this);
+        this.state = {
+            posts: []
+        };
+    }
+
+    updatePost(id) {
+        hashHistory.push('/addPost/' + id);
+    }
+
+    deletePost(id) {
+        if (confirm('Are you sure ?')) {
+            var self = this;
+            axios.post('/deletePost', {
+                id: id
+            })
+                .then(function (response) {
+                    self.getPost();
+                })
+                .catch(function (error) {
+
+                });
         }
-    //componentDidMount(){
-        //document.getElementById('homeHyperlink').className = "active";
-        //document.getElementById('addHyperLink').className = "";
-    //}
+    }
 
-
-    componentDidMount(){
+    getPost() {
         var self = this;
-        axios.post('/getPost', {
-        })
+        axios.post('/getPost', {})
             .then(function (response) {
-                self.setState({posts:response.data})
+                console.log('res is ', response);
+                self.setState({posts: response.data})
             })
             .catch(function (error) {
-                console.log('error is ',error);
+                console.log('error is ', error);
             });
     }
 
-    updatePost(id){;
-        hashHistory.push('/addPost/' + id);
+    componentDidMount() {
+        this.getPost();
+
+        document.getElementById('homeHyperlink').className = "active";
+        document.getElementById('addHyperLink').className = "";
     }
 
     render() {
@@ -50,16 +68,16 @@ class ShowPost extends React.Component {
                 </thead>
                 <tbody>
               {
-                  this.state.posts.map(function(post,index) {
+                  this.state.posts.map(function (post, index) {
                       return <tr key={index} >
-                          <td>{index+1}</td>
+                          <td>{index + 1}</td>
                           <td>{post.title}</td>
                           <td>{post.subject}</td>
                           <td>
-                              <span onClick={this.updatePost.bind(this,post._id)} className="glyphicon glyphicon-pencil"></span>
+                              <span onClick={this.updatePost.bind(this, post._id)} className="glyphicon glyphicon-pencil"></span>
                           </td>
                           <td>
-                              <span className="glyphicon glyphicon-remove"></span>
+                              <span onClick={this.deletePost.bind(this, post._id)} className="glyphicon glyphicon-remove"></span>
                           </td>
                       </tr>
                   }.bind(this))
@@ -77,26 +95,26 @@ class AddPost extends React.Component {
     constructor(props) {
         super(props);
         this.addPost = this.addPost.bind(this);
-        //this.getPostWithId = this.getPostWithId.bind(this);
+        this.getPostWithId = this.getPostWithId.bind(this);
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleSubjectChange = this.handleSubjectChange.bind(this);
         this.state = {
-            title:'',
-            subject:'',
-            id:''
+            title: '',
+            subject: '',
+            id: ''
         };
     }
 
-    handleTitleChange(e){
-        this.setState({title:e.target.value})
+    handleTitleChange(e) {
+        this.setState({title: e.target.value})
 
     }
 
-    handleSubjectChange(e){
-        this.setState({subject:e.target.value})
+    handleSubjectChange(e) {
+        this.setState({subject: e.target.value})
     }
 
-    addPost(){
+    addPost() {
 
         axios.post('/addPost', {
             title: this.state.title,
@@ -104,7 +122,7 @@ class AddPost extends React.Component {
             id: this.props.params.id
         })
             .then(function (response) {
-                console.log('response from add post is ',response);
+                console.log('response from add post is ', response);
                 hashHistory.push('/')
             })
             .catch(function (error) {
@@ -112,20 +130,27 @@ class AddPost extends React.Component {
             });
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        //var self = this;
+        document.getElementById('addHyperLink').className = "active";
+        document.getElementById('homeHyperlink').className = "";
+        this.getPostWithId();
+    }
+
+    getPostWithId(){
         var id = this.props.params.id;
         var self = this;
         axios.post('/getPostWithId', {
             id: id
         }).then(function (response) {
-            if(response){
-                self.setState({title:response.data.title});
-                self.setState({subject:response.data.subject});
-                self.setState({id:response.data.id});
+            if (response) {
+                self.setState({title: response.data.title});
+                self.setState({subject: response.data.subject});
+                self.setState({id: response.data.id});
             }
         })
             .catch(function (error) {
-                console.log('error is ',error);
+                console.log('error is ', error);
             });
     }
 
@@ -153,12 +178,10 @@ class AddPost extends React.Component {
 }
 
 
-
-
-    ReactDOM.render(
-        <Router history={hashHistory}>
-            <Route component={ShowPost} path="/"></Route>
-            <Route component={AddPost} path="/addPost(/:id)"></Route>
-        </Router>,
-document.getElementById('app')
+ReactDOM.render(
+    <Router history={hashHistory}>
+        <Route component={ShowPost} path="/"></Route>
+        <Route component={AddPost} path="/addPost(/:id)"></Route>
+    </Router>,
+    document.getElementById('app')
 );
