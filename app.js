@@ -60,13 +60,29 @@ app.get('/home', function(req, res){
 app.post('/addPost', function(req, res){
     var title = req.body.title;
     var subject = req.body.subject;
-    post.addPost(title, subject ,function(result){
-        res.send(result);
-    });
+    var id = req.body.id;
+    if(id == '' || id == undefined){
+        post.addPost(title, subject ,function(result){
+            res.send(result);
+        });
+    }else{
+        post.updatePost(id, title, subject ,function(result){
+            res.send(result);
+        });
+    }
+
+
 })
 
 app.post('/getpost',function(req,res){
     post.getPost(function(result){
         res.send(result);
     });
+})
+
+app.post('/getPostWithId', function(req,res){
+    var id = req.body.id;
+    post.getPostWithId(id, function(result){
+        res.send(result);
+    })
 })

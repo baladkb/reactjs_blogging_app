@@ -26,6 +26,8 @@ e. part 3 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-re
 
 f. part 4 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-part-4-update-delete-post--cms-28855
 
+       https://github.com/tutsplus/ReactBlogApp-EditDelete/blob/master/html/jumbotron-narrow.css
+
 g. part 5 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-part-5-profile-page--cms-29131 
 
 h. part 6 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-part-6-tags--cms-29228
