@@ -93,3 +93,18 @@ app.post('/deletePost', function(req,res){
         res.send(result)
     })
 })
+
+app.post('/getProfile',function(req, res){
+    user.getUserInfo(sessions.username, function(result){
+        res.send(result)
+    })
+})
+
+app.post('/updateProfile',function(req, res){
+    var name = req.body.name;
+    var password = req.body.password;
+
+    user.updateProfile(name, password, sessions.username, function(result){
+        res.send(result);
+    })
+})

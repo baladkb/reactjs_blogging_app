@@ -30,5 +30,8 @@ f. part 4 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-re
 
 g. part 5 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-part-5-profile-page--cms-29131 
 
+       https://github.com/tutsplus/ReactBlog-Profile
+
 h. part 6 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-part-6-tags--cms-29228
+
 
