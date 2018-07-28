@@ -60,13 +60,14 @@ app.get('/home', function(req, res){
 app.post('/addPost', function(req, res){
     var title = req.body.title;
     var subject = req.body.subject;
+    var tag = req.body.tag;
     var id = req.body.id;
     if(id == '' || id == undefined){
-        post.addPost(title, subject ,function(result){
+        post.addPost(title, subject ,tag, function(result){
             res.send(result);
         });
     }else{
-        post.updatePost(id, title, subject ,function(result){
+        post.updatePost(id, title, subject ,tag, function(result){
             res.send(result);
         });
     }
@@ -108,3 +109,17 @@ app.post('/updateProfile',function(req, res){
         res.send(result);
     })
 })
+
+app.post('/addtag', function(req, res){
+    var tag = req.body.tag;
+    post.addTag(tag,function(result){
+        res.send(result);
+    });
+})
+
+app.post('/getTag', function(req, res){
+
+    post.getTag(function(result){
+        res.send(result);
+    });
+});

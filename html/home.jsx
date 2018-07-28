@@ -96,12 +96,16 @@ class AddPost extends React.Component {
         super(props);
         this.addPost = this.addPost.bind(this);
         this.getPostWithId = this.getPostWithId.bind(this);
+        this.getTags = this.getTags.bind(this);
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleSubjectChange = this.handleSubjectChange.bind(this);
+        this.handleTagChange = this.handleTagChange.bind(this);
         this.state = {
             title: '',
             subject: '',
-            id: ''
+            id: '',
+            tag:0,
+            tags: []
         };
     }
 
@@ -115,10 +119,10 @@ class AddPost extends React.Component {
     }
 
     addPost() {
-
         axios.post('/addPost', {
             title: this.state.title,
             subject: this.state.subject,
+            tag: this.state.tag,
             id: this.props.params.id
         })
             .then(function (response) {
@@ -135,6 +139,7 @@ class AddPost extends React.Component {
         document.getElementById('addHyperLink').className = "active";
         document.getElementById('homeHyperlink').className = "";
         this.getPostWithId();
+        this.getTags();
     }
 
     getPostWithId(){
@@ -147,11 +152,30 @@ class AddPost extends React.Component {
                 self.setState({title: response.data.title});
                 self.setState({subject: response.data.subject});
                 self.setState({id: response.data.id});
+                self.setState({tag:response.data.tag})
             }
         })
             .catch(function (error) {
                 console.log('error is ', error);
             });
+    }
+
+    getTags(){
+        var self = this;
+        axios.post('/getTag', {
+        })
+            .then(function (response) {
+                if(response){
+                    self.setState({tags:response.data});
+                }
+            })
+            .catch(function (error) {
+                console.log('error is ',error);
+            });
+    }
+
+    handleTagChange(e){
+        this.setState({tag:e.target.value})
     }
 
     render() {
@@ -168,7 +192,21 @@ class AddPost extends React.Component {
                             <textarea value={this.state.subject} className="form-control" type="textarea" onChange={this.handleSubjectChange} name="subject"id="subject" placeholder="Subject" maxlength="140" rows="7"></textarea>
                         </div>
 
+                        <div className="form-group">
+                            <label for="sel1">Select Tag:</label>
+
+                            <select className="form-control"  value={this.state.tag} onChange={this.handleTagChange}>
+                                <option value="0">Select Tag</option>
+                                  {
+                                    this.state.tags.map(function (tag, i) {
+                                      return (<option key={i} value={tag._id}>{tag.name}</option>)
+                                    }.bind(this))
+                                  }
+                            </select>
+                        </div>
+
                         <button type="button" id="submit" name="submit" onClick={this.addPost} className="btn btn-primary pull-right">Add Post</button>
+
                     </form>
                 </div>
             </div>
@@ -260,11 +298,65 @@ class ShowProfile extends React.Component {
     }
 }
 
+class AddTag extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleTagChange = this.handleTagChange.bind(this);
+        this.addTag = this.addTag.bind(this);
+        this.state = {
+            tag:''
+        };
+    }
+
+    componentDidMount(){
+        document.getElementById('addHyperLink').className = "";
+        document.getElementById('homeHyperlink').className = "";
+        document.getElementById('profileHyperlink').className = "";
+        document.getElementById('tagHyperlink').className = "active";
+    }
+
+    handleTagChange(e){
+        this.setState({tag:e.target.value})
+    }
+
+    addTag(){
+        axios.post('/addtag', {
+            tag: this.state.tag
+        })
+            .then(function (response) {
+                console.log('reponse from add tag is ',response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    render() {
+        return (
+            <div className="col-md-5">
+                <div className="form-area">
+                    <form role="form">
+                        <br styles="clear:both" />
+                        <div className="form-group">
+                            <input type="text" value={this.state.tag} onChange={this.handleTagChange} className="form-control" id="tag" name="tag" placeholder="Tag" required />
+                        </div>
+                        <div className="form-group">
+                            <button type="button" id="submit" onClick={this.addTag} name="submit" className="btn btn-primary pull-right">Add Tag</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        )
+    }
+}
+
 ReactDOM.render(
     <Router history={hashHistory}>
         <Route component={ShowPost} path="/"></Route>
         <Route component={AddPost} path="/addPost(/:id)"></Route>
         <Route component={ShowProfile} path="/showProfile"></Route>
+        <Route component={AddTag} path="/addTag"></Route>
     </Router>,
     document.getElementById('app')
 );
