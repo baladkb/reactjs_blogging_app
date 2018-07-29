@@ -37,3 +37,9 @@ h. part 6 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-re
        https://github.com/tutsplus/ReactBlogApp-Tag
 
 ![Customer Grid](/html/index.png?raw=true "Index page")
+
+![Customer Grid](/html/create.png?raw=true "Index page")
+
+![Customer Grid](/html/create-tag.png?raw=true "Index page")
+
+![Customer Grid](/html/profile-edit.png?raw=true "Index page")
