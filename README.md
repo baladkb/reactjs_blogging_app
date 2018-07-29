@@ -35,3 +35,5 @@ g. part 5 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-re
 h. part 6 : https://code.tutsplus.com/tutorials/creating-a-blogging-app-using-react-part-6-tags--cms-29228
 
        https://github.com/tutsplus/ReactBlogApp-Tag
+
+![Customer Grid](/html/index.png?raw=true "Index page")
