@@ -85,3 +85,15 @@ body {
         padding: 90px 21px 5px 0px;
     }
 }
+
+
+@media screen and (min-width: 1000px){
+    .header {
+        margin-bottom: 0px;
+    }
+}
+
+
+th {
+    text-align: center;
+}

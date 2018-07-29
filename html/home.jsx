@@ -52,6 +52,9 @@ class ShowPost extends React.Component {
 
         document.getElementById('homeHyperlink').className = "active";
         document.getElementById('addHyperLink').className = "";
+        document.getElementById('tagHyperlink').className = "";
+        document.getElementById('profileHyperlink').className = "";
+
     }
 
     render() {
@@ -59,7 +62,7 @@ class ShowPost extends React.Component {
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>Sno</th>
                         <th>Title</th>
                         <th>Subject</th>
                         <th></th>
@@ -138,6 +141,9 @@ class AddPost extends React.Component {
         //var self = this;
         document.getElementById('addHyperLink').className = "active";
         document.getElementById('homeHyperlink').className = "";
+        document.getElementById('tagHyperlink').className = "";
+        document.getElementById('profileHyperlink').className = "";
+
         this.getPostWithId();
         this.getTags();
     }
@@ -233,6 +239,8 @@ class ShowProfile extends React.Component {
         document.getElementById('addHyperLink').className = "";
         document.getElementById('homeHyperlink').className = "";
         document.getElementById('profileHyperlink').className = "active";
+        document.getElementById('tagHyperlink').className = "";
+
         this.getProfile();
     }
 
